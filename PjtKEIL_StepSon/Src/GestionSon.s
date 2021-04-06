@@ -21,26 +21,37 @@ AdresseSon dcd 0
 	area    moncode,code,readonly
 ; écrire le code ici		
 	
-	extern Son
+	extern Son ; Son est l'adresse du tableau de sons
 	export CallbackSon
+	export SortieSon
 	
 CallbackSon
 
-	ldr r0,=AdresseSon	
-	ldr r1, [r0]	; r0 est l'adresse de adresse son, r1 est sa valeur
+	ldr r1,=AdresseSon
+	ldr r3,=SortieSon
+	ldr r0, [r1]	; r1 est l'adresse de adresse son, r0 est sa valeur
 	
 	; initialisation de adresse son si elle vaut 0
-	cmp r1, #0
-	beq	first
-	
-	; 
-	
+	cmp r0, #0
+	bne	lire_son
+	ldr r0, =Son
+	b lire_son	
 
+
+lire_son
+
+	; Lire le son tous les ticks d'horloge, en avançant de 16 bits à chaque fois
+	ldrsh r2, [r0] ; lire le son sur 16 bits
+	adds r2, #32768
+	mov r4, #719
+	mul r2, r4
+	mov r4, #65535
+	sdiv r2, r4
+	str r2, [r3] ; stocker le son lu dans SortieSon
+	add r0, #2 ; incrémente adresse son de 16 bits
+	str r0,[r1] ; stocke adresse son
 		
-first 
-	ldr r1, =Son
-	str r1, [r0]
-	bx lr
+	bx lr 
 	
 	END	
 		

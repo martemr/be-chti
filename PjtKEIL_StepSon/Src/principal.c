@@ -12,12 +12,12 @@ int main(void)
 // ===========================================================================
 
 	// Après exécution : le coeur CPU est clocké à 72MHz ainsi que tous les timers
-	CLOCK_Configure();
+ 	CLOCK_Configure();
 
 
 	// La périodicité du son que l'on veut jouer est de 91ms
-	// configuration du Timer 4 en débordement 91ms
-	Timer_1234_Init_ff(TIM4, 6552000);
+	// configuration du Timer 4 en débordement 91us
+	Timer_1234_Init_ff(TIM4, 6552);
 	Active_IT_Debordement_Timer(TIM4, 2, CallbackSon); // activer le débordement avec priorité 2 
 	
 
