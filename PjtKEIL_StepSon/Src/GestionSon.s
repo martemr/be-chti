@@ -2,7 +2,7 @@
 	THUMB   
 		
 
-; ====================== zone de réservation de données,  ======================================
+; ====================== zone de rÃ©servation de donnÃ©es,  ======================================
 ;Section RAM (read only) :
 	area    mesdata,data,readonly
 
@@ -19,7 +19,7 @@ AdresseSon dcd 0
 		
 ;Section ROM code (read only) :		
 	area    moncode,code,readonly
-; écrire le code ici		
+; Ã©crire le code ici		
 	
 	extern Son ; Son est l'adresse du tableau de sons
 	export CallbackSon
@@ -40,18 +40,18 @@ CallbackSon
 
 lire_son
 
-	; Lire le son tous les ticks d'horloge, en avançant de 16 bits à chaque fois
+	; Lire le son tous les ticks d'horloge, en avanÃ§ant de 16 bits Ã  chaque fois
 	ldrsh r2, [r0] ; lire le son sur 16 bits
 	
-	; mise à l'echelle [0, 719]
-	adds r2, #32768
+	; mise Ã  l'echelle [0, 719] : Produit en croix, maxi=65535 -> 719 , min=0->0
+	adds r2, #32768 ; DÃ©calage pour faire une valeur absolue (2^15)
 	mov r4, #719
 	mul r2, r4
 	mov r4, #65535
 	sdiv r2, r4
 	
 	str r2, [r3] ; stocker le son lu dans SortieSon
-	add r0, #2 ; incrémente adresse son de 16 bits
+	add r0, #2 ; incrÃ©mente adresse son de 16 bits
 	str r0,[r1] ; stocke adresse son
 		
 	bx lr 
