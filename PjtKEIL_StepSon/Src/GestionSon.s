@@ -22,21 +22,40 @@ AdresseSon dcd 0
 ; écrire le code ici		
 	
 	extern Son ; Son est l'adresse du tableau de sons
+	extern PWM_Set_Value_TIM3_Ch3
 	export CallbackSon
 	export SortieSon
+	extern LongueurSon
+		
+
+StartSon 
+	ldr r1,=AdresseSon
+	ldr r0, =Son
+	str r0,[r1] ; stocke adresse son
+	bl CallBackSon
 	
 CallbackSon
 
+	push {r4, r5, r6, lr}
 	ldr r1,=AdresseSon
 	ldr r3,=SortieSon
 	ldr r0, [r1]	; r1 est l'adresse de adresse son, r0 est sa valeur
+	
+	; Dire au programme de ne plus lire après la fin du son
+	
+	ldr r5, =LongueurSon
+	ldr r5, [r5]
+	mov r6, #2
+	mul r5, r6		; soit la taille de Son * 2 car 2 bits
+	ldr r6, =Son
+	add r5, r6
+	cmp r0, r5 
+	beq fin
 	
 	; initialisation de adresse son si elle vaut 0
 	cmp r0, #0 
 	bne	lire_son
 	ldr r0, =Son
-	b lire_son	
-
 
 lire_son
 
@@ -53,9 +72,18 @@ lire_son
 	str r2, [r3] ; stocker le son lu dans SortieSon
 	add r0, #2 ; incrémente adresse son de 16 bits
 	str r0,[r1] ; stocke adresse son
-		
-	bx lr 
+	
+	mov r0,r2
+	bl PWM_Set_Value_TIM3_Ch3
+	
+fin
+	pop {r4}
+	pop {r5}
+	pop {r6}
+	pop {pc}
 	
 	END	
+		
+
 		
 	
