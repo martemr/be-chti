@@ -30,6 +30,9 @@ La lecture du son marche, il n'y a pas d'erreur. On a aussi ajouté le GestionSo
 ### Partie 1
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> refs/remotes/origin/main
 #### Etape 1.1 : Petit rappel
 
 Les valeurs des fréquences correspondantes aux pistolets sont :
@@ -49,7 +52,10 @@ Les valeurs des fréquences correspondantes aux pistolets sont :
 ### Partie 2
 
 
+<<<<<<< HEAD
 **A faire :** *partie XX, ...*
 =======
+=======
+>>>>>>> refs/remotes/origin/main
 **A faire :** *partie XX, ...*
 >>>>>>> 9c47f5b2375b29e520a62d58ae4019a493a52e7f
