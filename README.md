@@ -1,7 +1,7 @@
 # be-chti
 
 
-## StepSon
+## **Step Son**
 ### Partie 1.
 ### Partie 2.
 ### Partie 3: 
@@ -20,7 +20,13 @@ Après vérification en simulation (portb) on a bien la PWM correcte.
 On va construire un filtre, de fréquence de coupure de 4kHz. Or fc=1/2pi*R*C donc on choisira R=1200 Ohms, C=33 nF.
 On a aussi ajouté une étape qui verifie que l'on est à la fin du son (AdresseSon + LongueurSon) et si oui quitte le programme.
 
-
 #### Etape 4.5 : Finalisation du module GestionSon.s
 
-**A faire :** *partie 4.5, vérifier le bon fonctionnement*
+La lecture du son marche, il n'y a pas d'erreur. On a aussi ajouté le GestionSon.h.
+
+
+
+## **Step DFT**
+### Partie 1
+
+**A faire :** *partie XX, ...*
