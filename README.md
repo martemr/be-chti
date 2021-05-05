@@ -29,10 +29,6 @@ La lecture du son marche, il n'y a pas d'erreur. On a aussi ajouté le GestionSo
 ## **Step DFT**
 ### Partie 1
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> refs/remotes/origin/main
 #### Etape 1.1 : Petit rappel
 
 Les valeurs des fréquences correspondantes aux pistolets sont :
@@ -48,14 +44,10 @@ Les valeurs des fréquences correspondantes aux pistolets sont :
 0xFE01 -> (complement à 2 = 0d0510) -> -0000.12451171875
 
 
-
 ### Partie 2
+3.
+4.
+5.
 
 
-<<<<<<< HEAD
-**A faire :** *partie XX, ...*
-=======
-=======
->>>>>>> refs/remotes/origin/main
-**A faire :** *partie XX, ...*
->>>>>>> 9c47f5b2375b29e520a62d58ae4019a493a52e7f
+**A faire :** *partie 2, question 5 : finir de coder la DFT (a partir du pseudo code, fiche Marie) *

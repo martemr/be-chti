@@ -9,7 +9,7 @@
 
 ;Section RAM (read write):
 	area    maram,data,readwrite
-		
+	
 
 	
 ; ===============================================================================================
@@ -22,6 +22,32 @@
 ; écrire le code ici		
 
 
+	; On appelle cette fonction avec les deux arguments : 
+	; r0 = Signal64ech, r1 = k
+DFT_ModuleAuCarre 
+	push {r4, r5}
+	
+	; r0 = LeSignal
+	; r1 = k
+	mov r2, #64 ; r2=64 est M=64 car 64 echantillons du signal
+	mov r3, #0  ; r3=n où n est la n ieme itération
+	ldr r4, =TabCos ; r4 est l'adresse du premier element du tableau de cos
+	mov r5, #0  ; r5 est le stockage du résultat, vaut 0 au départ
+	
+Boucle
+	
+	
+	; A FAIRE : Ecrire le calcul de la DFT dans la boucle (ici)
+	
+	add r3, #1 ; incrémenter n
+	cmp r3, r2 ; Boucler tant que n est inférieur à 64
+	bne Boucle
+	
+fin
+	pop {r4}
+	pop {r5}
+	
+	END	
 
 
 
