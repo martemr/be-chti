@@ -29,6 +29,7 @@ La lecture du son marche, il n'y a pas d'erreur. On a aussi ajouté le GestionSo
 ## **Step DFT**
 ### Partie 1
 
+<<<<<<< HEAD
 #### Etape 1.1 : Petit rappel
 
 Les valeurs des fréquences correspondantes aux pistolets sont :
@@ -49,3 +50,6 @@ Les valeurs des fréquences correspondantes aux pistolets sont :
 
 
 **A faire :** *partie XX, ...*
+=======
+**A faire :** *partie XX, ...*
+>>>>>>> 9c47f5b2375b29e520a62d58ae4019a493a52e7f
