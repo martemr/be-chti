@@ -41,75 +41,82 @@ ARM Macro Assembler    Page 1
    27 00000000                 export           SortieSon
    28 00000000                 extern           LongueurSon
    29 00000000         
-   30 00000000         CallbackSon
-   31 00000000         
-   32 00000000 B570            push             {r4, r5, r6, lr}
-   33 00000002 4913            ldr              r1,=AdresseSon
-   34 00000004 4B13            ldr              r3,=SortieSon
-   35 00000006 6808            ldr              r0, [r1]    ; r1 est l'adresse 
+   30 00000000         
+   31 00000000         StartSon
+   32 00000000 4915            ldr              r1,=AdresseSon
+   33 00000002 4816            ldr              r0, =Son
+   34 00000004 6008            str              r0,[r1]     ; stocke adresse so
+                                                            n
+   35 00000006         
+   36 00000006         CallbackSon
+   37 00000006         
+   38 00000006 B570            push             {r4, r5, r6, lr}
+   39 00000008 4913            ldr              r1,=AdresseSon
+   40 0000000A 4B15            ldr              r3,=SortieSon
+   41 0000000C 6808            ldr              r0, [r1]    ; r1 est l'adresse 
                                                             de adresse son, r0 
                                                             est sa valeur
-   36 00000008         
-   37 00000008         ; Dire au programme de ne plus lire après la fin du son
+   42 0000000E         
+   43 0000000E         ; Dire au programme de ne plus lire après la fin du son
                        
-   38 00000008         
-   39 00000008 4D13            ldr              r5, =LongueurSon
-   40 0000000A 682D            ldr              r5, [r5]
-   41 0000000C F04F 0602       mov              r6, #2
-   42 00000010 FB05 F506       mul              r5, r6      ; soit la taille de
-                                                             Son * 2 car 2 bits
-                                                            
-   43 00000014 4E11            ldr              r6, =Son
-   44 00000016 4435            add              r5, r6
-   45 00000018 42A8            cmp              r0, r5
-   46 0000001A D015            beq              fin
+   44 0000000E         
+   45 0000000E 4D15            ldr              r5, =LongueurSon
+   46 00000010 682D            ldr              r5, [r5]
+   47 00000012 F04F 0602       mov              r6, #2
 
 
 
 ARM Macro Assembler    Page 2 
 
 
-   47 0000001C         
-   48 0000001C         ; initialisation de adresse son si elle vaut 0
-   49 0000001C 2800            cmp              r0, #0
-   50 0000001E D100            bne              lire_son
-   51 00000020 480E            ldr              r0, =Son
-   52 00000022         
-   53 00000022         lire_son
-   54 00000022         
-   55 00000022         ; Lire le son tous les ticks d'horloge, en avançant de 
+   48 00000016 FB05 F506       mul              r5, r6      ; soit la taille de
+                                                             Son * 2 car 2 bits
+                                                            
+   49 0000001A 4E10            ldr              r6, =Son
+   50 0000001C 4435            add              r5, r6
+   51 0000001E 42A8            cmp              r0, r5
+   52 00000020 D015            beq              fin
+   53 00000022         
+   54 00000022         ; initialisation de adresse son si elle vaut 0
+   55 00000022 2800            cmp              r0, #0
+   56 00000024 D100            bne              lire_son
+   57 00000026 480D            ldr              r0, =Son
+   58 00000028         
+   59 00000028         lire_son
+   60 00000028         
+   61 00000028         ; Lire le son tous les ticks d'horloge, en avançant de 
                        16 bits à chaque fois
-   56 00000022 F9B0 2000       ldrsh            r2, [r0]    ; lire le son sur 1
+   62 00000028 F9B0 2000       ldrsh            r2, [r0]    ; lire le son sur 1
                                                             6 bits
-   57 00000026         
-   58 00000026         ; mise à l'echelle [0, 719] : Produit en croix, maxi=65
+   63 0000002C         
+   64 0000002C         ; mise à l'echelle [0, 719] : Produit en croix, maxi=65
                        535 -> 719 , min=0->0
-   59 00000026 F512 4200       adds             r2, #32768  ; Décalage pour fa
+   65 0000002C F512 4200       adds             r2, #32768  ; Décalage pour fa
                                                             ire une valeur abso
                                                             lue (2^15)
-   60 0000002A F240 24CF       mov              r4, #719
-   61 0000002E FB02 F204       mul              r2, r4
-   62 00000032 F64F 74FF       mov              r4, #65535
-   63 00000036 FB92 F2F4       sdiv             r2, r4
-   64 0000003A         
-   65 0000003A 601A            str              r2, [r3]    ; stocker le son lu
+   66 00000030 F240 24CF       mov              r4, #719
+   67 00000034 FB02 F204       mul              r2, r4
+   68 00000038 F64F 74FF       mov              r4, #65535
+   69 0000003C FB92 F2F4       sdiv             r2, r4
+   70 00000040         
+   71 00000040 601A            str              r2, [r3]    ; stocker le son lu
                                                              dans SortieSon
-   66 0000003C F100 0002       add              r0, #2      ; incrémente adres
+   72 00000042 F100 0002       add              r0, #2      ; incrémente adres
                                                             se son de 16 bits
-   67 00000040 6008            str              r0,[r1]     ; stocke adresse so
+   73 00000046 6008            str              r0,[r1]     ; stocke adresse so
                                                             n
-   68 00000042         
-   69 00000042 4610            mov              r0,r2
-   70 00000044 F7FF FFFE       bl               PWM_Set_Value_TIM3_Ch3
-   71 00000048         
-   72 00000048         fin
-   73 00000048 BC10            pop              {r4}
-   74 0000004A BC20            pop              {r5}
-   75 0000004C BC40            pop              {r6}
-   76 0000004E BD00            pop              {pc}
-   77 00000050         
-   78 00000050                 END
-              00000000 
+   74 00000048         
+   75 00000048 4610            mov              r0,r2
+   76 0000004A F7FF FFFE       bl               PWM_Set_Value_TIM3_Ch3
+   77 0000004E         
+   78 0000004E         fin
+   79 0000004E BC10            pop              {r4}
+   80 00000050 BC20            pop              {r5}
+   81 00000052 BC40            pop              {r6}
+   82 00000054 BD00            pop              {pc}
+   83 00000056         
+   84 00000056                 END
+              00 00 00000000 
               00000000 
               00000000 
               00000000 
@@ -147,8 +154,9 @@ Symbol: AdresseSon
    Definitions
       At line 13 in file Src\GestionSon.s
    Uses
-      At line 33 in file Src\GestionSon.s
-Comment: AdresseSon used once
+      At line 32 in file Src\GestionSon.s
+      At line 39 in file Src\GestionSon.s
+
 SortieSon 00000000
 
 Symbol: SortieSon
@@ -156,7 +164,7 @@ Symbol: SortieSon
       At line 12 in file Src\GestionSon.s
    Uses
       At line 27 in file Src\GestionSon.s
-      At line 34 in file Src\GestionSon.s
+      At line 40 in file Src\GestionSon.s
 
 maram 00000000
 
@@ -173,29 +181,37 @@ Comment: maram unused
 ARM Macro Assembler    Page 1 Alphabetic symbol ordering
 Relocatable symbols
 
-CallbackSon 00000000
+CallbackSon 00000006
 
 Symbol: CallbackSon
    Definitions
-      At line 30 in file Src\GestionSon.s
+      At line 36 in file Src\GestionSon.s
    Uses
       At line 26 in file Src\GestionSon.s
 Comment: CallbackSon used once
-fin 00000048
+StartSon 00000000
+
+Symbol: StartSon
+   Definitions
+      At line 31 in file Src\GestionSon.s
+   Uses
+      None
+Comment: StartSon unused
+fin 0000004E
 
 Symbol: fin
    Definitions
-      At line 72 in file Src\GestionSon.s
+      At line 78 in file Src\GestionSon.s
    Uses
-      At line 46 in file Src\GestionSon.s
+      At line 52 in file Src\GestionSon.s
 Comment: fin used once
-lire_son 00000022
+lire_son 00000028
 
 Symbol: lire_son
    Definitions
-      At line 53 in file Src\GestionSon.s
+      At line 59 in file Src\GestionSon.s
    Uses
-      At line 50 in file Src\GestionSon.s
+      At line 56 in file Src\GestionSon.s
 Comment: lire_son used once
 moncode 00000000
 
@@ -205,7 +221,7 @@ Symbol: moncode
    Uses
       None
 Comment: moncode unused
-4 symbols
+5 symbols
 
 
 
@@ -218,7 +234,7 @@ Symbol: LongueurSon
    Definitions
       At line 28 in file Src\GestionSon.s
    Uses
-      At line 39 in file Src\GestionSon.s
+      At line 45 in file Src\GestionSon.s
 Comment: LongueurSon used once
 PWM_Set_Value_TIM3_Ch3 00000000
 
@@ -226,7 +242,7 @@ Symbol: PWM_Set_Value_TIM3_Ch3
    Definitions
       At line 25 in file Src\GestionSon.s
    Uses
-      At line 70 in file Src\GestionSon.s
+      At line 76 in file Src\GestionSon.s
 Comment: PWM_Set_Value_TIM3_Ch3 used once
 Son 00000000
 
@@ -234,8 +250,9 @@ Symbol: Son
    Definitions
       At line 24 in file Src\GestionSon.s
    Uses
-      At line 43 in file Src\GestionSon.s
-      At line 51 in file Src\GestionSon.s
+      At line 33 in file Src\GestionSon.s
+      At line 49 in file Src\GestionSon.s
+      At line 57 in file Src\GestionSon.s
 
 3 symbols
-348 symbols in table
+349 symbols in table

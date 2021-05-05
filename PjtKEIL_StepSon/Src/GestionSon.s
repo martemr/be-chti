@@ -32,7 +32,6 @@ StartSon
 	ldr r1,=AdresseSon
 	ldr r0, =Son
 	str r0,[r1] ; stocke adresse son
-	bl CallBackSon
 	
 CallbackSon
 
