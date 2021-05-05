@@ -29,4 +29,23 @@ La lecture du son marche, il n'y a pas d'erreur. On a aussi ajouté le GestionSo
 ## **Step DFT**
 ### Partie 1
 
+#### Etape 1.1 : Petit rappel
+
+Les valeurs des fréquences correspondantes aux pistolets sont :
+* k1 = 85 kHz
+* k2 = 90 kHz
+* k3 = 95 kHz
+* k4 = 100 kHz
+* k5 = 115 kHz
+* k6 = 120 kHz
+
+2. 
+0x02C1 → 0d705    -> 0000.172119140625
+0xFE01 -> (complement à 2 = 0d0510) -> -0000.12451171875
+
+
+
+### Partie 2
+
+
 **A faire :** *partie XX, ...*
