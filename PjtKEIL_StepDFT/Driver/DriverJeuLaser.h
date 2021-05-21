@@ -18,7 +18,7 @@
 #ifndef DRIVERJEULASER_H__
 #define DRIVERJEULASER_H__
 
-#include "stm32f10x.h"
+#include <stm32f10x.h>
 
 //**********************************************************************************************************
 //---------------------          CONFIGURATION CLOCK DU STM32         --------------------------------------

@@ -15,6 +15,7 @@
 ; ===============================================================================================
 	
 
+
 		
 ;Section ROM code (read only) :		
 	area    moncode,code,readonly
@@ -26,7 +27,7 @@
 	; On appelle cette fonction avec les deux arguments : 
 	; r0 = Signal64ech, r1 = k
 DFT_ModuleAuCarre 
-	push {r4-r9, lr}
+	push {r4, r5, r6, r7, r8, r9}
 	
 					; r0 = LeSignal
 					; r1 = k 
@@ -46,9 +47,8 @@ Boucle
 	add r0, #2   	; Changer la valeur de l'adresse à lire
 	
 	; Calculer la valeur du cos
-	mul r7, r1, r3	    ; r7=k*n
-	and r7, #0x3F		; r7 modulo 64 
-	ldrsh r8, [r4 ,r7]  ; TabCos[r7]
+	mul r7, r1, r3	   ; r7=k*n
+	ldrsh r8, [r4 ,r7] ; TabCos[r7]
 	
 	; Multiplier les deux valeurs
 	mul r9, r6, r8  ; multiplier le signal x(n) et le cos
@@ -63,8 +63,14 @@ Boucle
 	mul r0, r5, r5
 	
 fin
-	pop {r4-r9, pc}
-
+	pop {r4}
+	pop {r5}
+	pop {r6}
+	pop {r7}
+	pop {r8}
+	pop {r9}
+	
+	END	
 
 
 

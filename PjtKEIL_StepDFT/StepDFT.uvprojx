@@ -388,6 +388,16 @@
               <FileType>1</FileType>
               <FilePath>.\Src\principal.c</FilePath>
             </File>
+            <File>
+              <FileName>Signal.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\Signal.asm</FilePath>
+            </File>
+            <File>
+              <FileName>DFT.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\DFT.s</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -407,6 +417,11 @@
               <FileName>DriverJeuLaser.lib</FileName>
               <FileType>4</FileType>
               <FilePath>.\Driver\DriverJeuLaser.lib</FilePath>
+            </File>
+            <File>
+              <FileName>DriverJeuLaser.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver\DriverJeuLaser.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -797,6 +812,16 @@
               <FileType>1</FileType>
               <FilePath>.\Src\principal.c</FilePath>
             </File>
+            <File>
+              <FileName>Signal.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\Signal.asm</FilePath>
+            </File>
+            <File>
+              <FileName>DFT.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\DFT.s</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -816,6 +841,11 @@
               <FileName>DriverJeuLaser.lib</FileName>
               <FileType>4</FileType>
               <FilePath>.\Driver\DriverJeuLaser.lib</FilePath>
+            </File>
+            <File>
+              <FileName>DriverJeuLaser.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver\DriverJeuLaser.h</FilePath>
             </File>
           </Files>
         </Group>
@@ -1275,6 +1305,16 @@
               <FileType>1</FileType>
               <FilePath>.\Src\principal.c</FilePath>
             </File>
+            <File>
+              <FileName>Signal.asm</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\Signal.asm</FilePath>
+            </File>
+            <File>
+              <FileName>DFT.s</FileName>
+              <FileType>2</FileType>
+              <FilePath>.\Src\DFT.s</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -1294,6 +1334,11 @@
               <FileName>DriverJeuLaser.lib</FileName>
               <FileType>4</FileType>
               <FilePath>.\Driver\DriverJeuLaser.lib</FilePath>
+            </File>
+            <File>
+              <FileName>DriverJeuLaser.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\Driver\DriverJeuLaser.h</FilePath>
             </File>
           </Files>
         </Group>
