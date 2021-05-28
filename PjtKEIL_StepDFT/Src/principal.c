@@ -5,6 +5,8 @@
 
 int DFT_ModuleAuCarre( short int * Signal64ech, char k) ;
 extern short int LeSignal;
+extern short int TabCos;
+extern short int TabSin;
 
 int main(void)
 {

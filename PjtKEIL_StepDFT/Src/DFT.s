@@ -22,41 +22,63 @@
 
 	export DFT_ModuleAuCarre
 	extern LeSignal
+	export TabCos
+	export TabSin
 
 	; On appelle cette fonction avec les deux arguments : 
 	; r0 = Signal64ech, r1 = k
-DFT_ModuleAuCarre 
+
+DFT_ModuleAuCarre
+	push {r4, lr}
+	
+	; Partie Réelle
+	push {r0}
+	ldr r2, =TabCos ; r4 est l'adresse du premier element du tableau de cos
+	bl Calcul_DFT
+	mov r4, r0
+	pop {r0}
+	
+	; Partie Imaginaire
+	ldr r2, =TabSin ; r4 est l'adresse du premier element du tableau de cos
+	bl Calcul_DFT
+	add r0, r4
+	
+	pop {r4, pc}
+
+
+Calcul_DFT
 	push {r4-r9, lr}
 	
 					; r0 = LeSignal
 					; r1 = k 
-	mov r2, #64     ; r2=64 est M=64 car 64 echantillons du signal
+					; r2 = TabCos ou TabSin
 	mov r3, #0      ; r3=n où n est la n ieme itération
-	ldr r4, =TabCos ; r4 est l'adresse du premier element du tableau de cos
+	mov r4, #64     ; r4=64 est M=64 car 64 echantillons du signal
 	mov r5, #0      ; r5 est le stockage du résultat, vaut 0 au départ
-					; r6 est la valeur lue du signal
-					; r7 est l'indice auquel lire le cos : r7=k*n
-					; r8 est la valeur calculée r8=(cos(r7))
-					; r9 est la multiplication du cos et du signal
+	mov r6, #0		; r6 est la valeur lue du signal
+	mov r7, #0		; r7 est l'indice auquel lire le cos : r7=k*n
+	mov r8, #0		; r8 est la valeur calculée r8=(cos(r7))
+	mov r9, #0		; r9 est la multiplication du cos et du signal
+	
 	
 Boucle
-	
+		
 	; Calculer la valeur du signal
 	ldrsh r6, [r0] 	; Lire sur 2 octets le signal
 	add r0, #2   	; Changer la valeur de l'adresse à lire
 	
 	; Calculer la valeur du cos
 	mul r7, r1, r3	    ; r7=k*n
-	and r7, #0x3F		; r7 modulo 64 
-	ldrsh r8, [r4 ,r7]  ; TabCos[r7]
+	and r7, r7, #0x3F 	; r7 modulo 64 
+	ldrsh r8, [r2 , r7, lsl #1]  ; TabCos[r7]
 	
 	; Multiplier les deux valeurs
-	mul r9, r6, r8  ; multiplier le signal x(n) et le cos
+	mul r9, r6, r8  ; multiplier le signal x(n) et le cos ou sin
 	add r5, r9		; l'ajouter au résultat
 
 	; Reboucler
 	add r3, #1 ; incrémenter n
-	cmp r3, r2 ; Boucler tant que n est inférieur à 64
+	cmp r3, r4 ; Boucler tant que n est inférieur à 64
 	bne Boucle
 	
 	; Retourner le résultat au carré
@@ -64,7 +86,6 @@ Boucle
 	
 fin
 	pop {r4-r9, pc}
-
 
 
 
