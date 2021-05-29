@@ -1,9 +1,7 @@
-# be-chti
+# Bureau d'étude de CHTI - année 2021
 
 
 ## **Step Son**
-### Partie 1.
-### Partie 2.
 ### Partie 3: 
 On affiche le signal, centré entre 0 et 719. 
 
@@ -27,9 +25,6 @@ La lecture du son marche, il n'y a pas d'erreur. On a aussi ajouté le GestionSo
 
 
 ## **Step DFT**
-### Partie 1
-
-#### Etape 1.1 : Petit rappel
 
 Les valeurs des fréquences correspondantes aux pistolets sont :
 * k1 = 85 kHz
@@ -39,15 +34,11 @@ Les valeurs des fréquences correspondantes aux pistolets sont :
 * k5 = 115 kHz
 * k6 = 120 kHz
 
-2. 
+Conversions : 
 0x02C1 → 0d705    -> 0000.172119140625
 0xFE01 -> (complement à 2 = 0d0510) -> -0000.12451171875
 
 
-### Partie 2
-3.
-4.
-5.
+## **Dernier step **
 
 
-**A faire :** *partie 2, question 5 : finir de coder la DFT (a partir du pseudo code, fiche Marie) *
