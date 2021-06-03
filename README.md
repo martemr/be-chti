@@ -1,44 +1,16 @@
 # Bureau d'étude de CHTI - année 2021
 
+## Probleme 
+Le Bureau d'Etudes CHTI avait pour but de créer un systeme de pistolets lasers. 
+Nous avons procédés par étape : 
+* La lecture et amplification d'un signal provenant d'une photodiode
+* Le calcul de sa DFT en assembleur
+* L'emmission d'un son à chaque réception si le signal est celui attendu (bon pistolet)
+* L'affichage des scores.
 
-## **Step Son**
-### Partie 3: 
-On affiche le signal, centré entre 0 et 719. 
+## Fin du BE
+Nous nous sommes arétés à l'étape d'émission du son avec le signal réel. En fonction de ce signal et donc de sa DFT, nous choisisons d'emmetre ou non le son.
+Il nous restait à faire l'affichage des points.
 
-### Partie 4:
-#### Etape 4.2 : Observation de la PWM en simulation LTSpice
-On remarque dans la simulation LTSpice que le PWM est à l'état haut quand le compteur est inférieur à compvalue.
-Le PWM va donc avoir beaucoup d'etats hauts quand le signal est de haute amplitude, et proportionellement beaucoup de bas quand l'amplitude est faible. Le filtre permet de reconstituer le signal à partir du PWM.
-
-#### Etape 4.3 : Ajout de la PWM dans le programme
-On fixe la période à 720ms, soit 1.39mHz de fréquence
-Après vérification en simulation (portb) on a bien la PWM correcte.
-
-#### Etape 4.4 : Test du programme sur cible réelle 
-On va construire un filtre, de fréquence de coupure de 4kHz. Or fc=1/2pi*R*C donc on choisira R=1200 Ohms, C=33 nF.
-On a aussi ajouté une étape qui verifie que l'on est à la fin du son (AdresseSon + LongueurSon) et si oui quitte le programme.
-
-#### Etape 4.5 : Finalisation du module GestionSon.s
-
-La lecture du son marche, il n'y a pas d'erreur. On a aussi ajouté le GestionSon.h.
-
-
-
-## **Step DFT**
-
-Les valeurs des fréquences correspondantes aux pistolets sont :
-* k1 = 85 kHz
-* k2 = 90 kHz
-* k3 = 95 kHz
-* k4 = 100 kHz
-* k5 = 115 kHz
-* k6 = 120 kHz
-
-Conversions : 
-0x02C1 → 0d705    -> 0000.172119140625
-0xFE01 -> (complement à 2 = 0d0510) -> -0000.12451171875
-
-
-## **Dernier step **
-
-
+## Commentaires 
+Pour le calcul de la DFT, nous avons calculé dans un premier temps toute la partie réelle, puis toute la partie imaginaire. Nous avons ensuite sommés les deux. On pourrait optimiser en mettant le calcul dans une seule boucle et sommer au fur et à mesure.
